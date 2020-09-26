@@ -8,12 +8,12 @@ screen = pygame.display.set_mode(size, 0, 32)
 pygame.display.set_caption('test')
 
 #################################
-spriteRight = pygame.image.load('C://Users//Dylan//Desktop//sprite//1.png')
+spriteRight = pygame.image.load('C://Users//Dylan//PycharmProjects//pypro//sprite folder//1.png')
 
 
 ##############################
 class player(object):
-    def __int__(self, x, y):
+    def __init__(self, x, y):
         self.count = 0
         self.counterpower = 0
         self.x = x
@@ -41,7 +41,7 @@ class player(object):
     pygame.display.update()
 
 
-man = player()
+man = player(90, 90)
 run = True
 while run:
     if man.startgame:
@@ -67,21 +67,7 @@ while run:
     else:
         man.walkcount = 0
 
-    if man.jump:
-        man.y -= 100
-        man.jump = False
-        man.counterpower += 30
-        if man.counterpower >= 30:
-            while man.count != 1:
-                man.count = self.count + 1
-                if man.y < 740:
-                    man.y += 10
-                else:
-                    man.count = 0
-                    man.counterpower = 0
-                    man.jump = False
-
-    game()
+    man.game(screen)
 
     pygame.display.flip()
     screen.fill((0, 0, 0))
