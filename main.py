@@ -43,18 +43,23 @@ class player(object):
     pygame.display.update()
 
 
-man = player(90, 90)
-cursor = player(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
+class Cursor(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def drawCursor(self, screen, cursorImg):
+        screen.blit(cursorImg, (self.x, self.y))
+
+
+man = player(90, 740)
+cursor = Cursor(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
+
 run = True
 pygame.mouse.set_visible(False)
 while run:
     cursor.x = pygame.mouse.get_pos()[0]
     cursor.y = pygame.mouse.get_pos()[1]
-    if man.startGame:
-        if man.y < 740:
-            man.y += 10
-        else:
-            man.startGame = False
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -89,10 +94,8 @@ while run:
             man.jumpCount = 10
             man.jump = False
             man.y = man.startPos
-
     man.draw(screen, spriteRightImg)
-    cursor.draw(screen, cursorImg)
+    cursor.drawCursor(screen, cursorImg)
     pygame.display.flip()
     screen.fill((0, 0, 0))
-    clock.tick(240)
-# test
+    clock.tick(30)
